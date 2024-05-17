@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grid">
+      <h2>QR Code Generator</h2>
+      <center>
+        <img src="" id="img" alt="" />
+      </center>
+
+      <select id="size">
+        <option value="100">100X100</option>
+        <option value="150">150X150</option>
+        <option value="200">200X200</option>
+        <option value="250">250X250</option>
+        <option value="300">300X300</option>
+      </select>
+      <br /><br />
+      <textarea placeholder="Enter Your Text" id="qrtext"></textarea>
+      <small style="color: red;" id="err"></small>
+      <br /><br />
+      <input type="submit" value="Generate" onclick="genQR()" />
+
+      <p>Developed by Generation 110</p>
+    </div>
+
+    <script type="text/javascript">
+        function genQR() {
+            let err = ""
+            var qrapi = "https://api.qrserver.com/v1/create-qr-code/?"
+            // var gapi = "https://chart.googleapis.com/chart?cht=qr&chs=";
+            var myimg = document.getElementById('img');
+            var mytext = document.getElementById('qrtext').value;
+            var mysize = document.getElementById('size').value;
+  
+            if (mytext!== "" && mysize !=="") {
+              myimg.src = qrapi+"size="+mysize+"x"+mysize+"&data="+mytext;
+              document.getElementById('err').innerHTML = err;
+            }
+            else{
+                err = "Please Enter Text"
+                myimg.src = ""
+                document.getElementById('err').innerHTML = err;
+            }
+        }
+      </script>
+  </body>
+</html>
